@@ -10,12 +10,25 @@
 body {
     font-family: 'Cinzel', serif;
     text-align: center;
-    background: #0a0a0a url('https://i.imgur.com/4XAnpbV.gif') repeat; /* Dark Starry Background */
+    background: #0a0a0a url(image.png) ; /* Dark Starry Background */
     color: #f1c40f; /* Golden Hogwarts Text */
     margin: 0;
     padding: 20px;
     cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur101.cur'), auto; /* Magic Wand Cursor */
     overflow-x: hidden;
+    animation: magicalBackground 5s linear infinite; /* Magical background animation */
+}
+
+@keyframes magicalBackground {
+    0% {
+        background-position: 0% 5gi0%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* 🏆 Glowing Titles with Flickering Effect */
@@ -23,7 +36,28 @@ h1, h2 {
     font-family: 'HarryP', serif;
     color: #f1c40f;
     text-shadow: 2px 2px 10px #ffcc00;
-    animation: glowText 1.5s infinite alternate; /* Magic glow effect */
+    animation: glowText 1.5s infinite alternate, flicker 1s infinite; /* Magic glow and flicker effect */
+}
+
+@keyframes glowText {
+    from {
+        text-shadow: 2px 2px 10px #ffcc00;
+    }
+    to {
+        text-shadow: 2px 2px 20px #ffd700;
+    }
+}
+
+@keyframes flicker {
+    0% {
+        text-shadow: 2px 2px 10px #ffcc00, 0 0 15px #f1c40f;
+    }
+    50% {
+        text-shadow: 2px 2px 5px #ffcc00, 0 0 10px #ff6347;
+    }
+    100% {
+        text-shadow: 2px 2px 10px #ffcc00, 0 0 15px #f1c40f;
+    }
 }
 
 /* 📜 Form Styling: Dark Background and Glowing Border */
@@ -36,6 +70,17 @@ h1, h2 {
     animation: fadeIn 2s ease-in-out;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* 🌙 Dark Themed Input Fields */
 input {
     padding: 10px;
@@ -44,6 +89,16 @@ input {
     border-radius: 5px;
     background: #222; /* Dark Input Fields */
     color: white;
+    animation: glowInput 2s infinite alternate; /* Input glow effect */
+}
+
+@keyframes glowInput {
+    from {
+        box-shadow: 0 0 5px #f1c40f;
+    }
+    to {
+        box-shadow: 0 0 15px #ffcc00;
+    }
 }
 
 /* 🔮 Magical Buttons with Wand Spark Effect */
@@ -58,6 +113,16 @@ button {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     position: relative;
     overflow: hidden;
+    animation: buttonGlow 1.5s infinite alternate; /* Button glow effect */
+}
+
+@keyframes buttonGlow {
+    from {
+        box-shadow: 0 0 10px #f1c40f;
+    }
+    to {
+        box-shadow: 0 0 20px #ffcc00;
+    }
 }
 
 /* ✨ Hover Effect: Glowing with Wand Spark */
@@ -101,24 +166,6 @@ button:hover::after {
     padding: 20px;
 }
 
-/* 📜 Spellbook Styling */
-.book-card {
-    background: rgba(15, 15, 15, 0.9);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #f1c40f;
-    text-align: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border: 2px solid #f1c40f;
-    animation: floatBook 3s infinite ease-in-out;
-}
-
-/* 📚 Hover Effect: Floating Spellbook */
-.book-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 0 30px #f1c40f;
-}
-
 /* 📖 Book Covers */
 .book-cover {
     width: 100px;
@@ -128,17 +175,6 @@ button:hover::after {
     margin-bottom: 10px;
     border: 2px solid #f1c40f;
     animation: fadeIn 2s ease-in-out;
-}
-
-/* 🕯️ Floating Magical Candles */
-.candle {
-    position: absolute;
-    width: 10px;
-    height: 30px;
-    background: #ffcc00;
-    border-radius: 5px;
-    box-shadow: 0 0 20px #ffcc00;
-    animation: floatCandle 4s infinite alternate ease-in-out;
 }
 
 /* ✨ Glowing Wand Effect */
@@ -169,29 +205,6 @@ body {
     }
 }
 
-/* ✨ Magic Glow Text */
-@keyframes glowText {
-    from {
-        text-shadow: 2px 2px 10px #ffcc00;
-    }
-    to {
-        text-shadow: 2px 2px 20px #ffd700;
-    }
-}
-
-/* 📖 Floating Spellbook Animation */
-@keyframes floatBook {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
 /* 🎩 Smooth Fade-in for Elements */
 @keyframes fadeIn {
     from {
@@ -204,19 +217,38 @@ body {
     }
 }
 
-/* 🕯️ Floating Candle Animation */
-@keyframes floatCandle {
+/* ✨ New Animations for Magical Effects */
+
+/* ✨ Glowing Borders for Input Fields */
+input:focus {
+    outline: none;
+    box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
+    border-color: #f1c40f;
+}
+
+/* 🪄 Starry Sparkles in the Background */
+@keyframes stars {
     0% {
-        transform: translateY(0px);
+        transform: translateY(0);
     }
     100% {
-        transform: translateY(-15px);
+        transform: translateY(-100%);
     }
 }
 
-/* 🔄 Responsive Design for Small Screens */
-@media (max-width: 600px) {
-    #book-collection, #book-list {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
+.star {
+    position: absolute;
+    background-color: #f1c40f;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    animation: stars 2s infinite ease-in-out;
+}
+
+.star:nth-child(odd) {
+    animation-duration: 1.5s;
+}
+
+.star:nth-child(even) {
+    animation-duration: 2.5s;
 }

@@ -1,54 +1,47 @@
-// 📜 Ensures that the script runs only after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
     console.log("📜 JS Loaded Successfully!");
 
-    // 🌦️ Event Listener for Weather Recommendation Button
+    // 🌦️ Event Listener for Weather
     document.getElementById("get-weather-btn").addEventListener("click", getWeatherBasedRecommendation);
 
-    // 📖 Load saved books from localStorage on page load
     loadBooks();
 });
 
-// 🌦️ Fetch Weather Data & Recommend a Book Genre
+// 🌦️ Fetch Weather and Recommend Genres + Fetch Books for That Genre
 function getWeatherBasedRecommendation() {
-    let city = document.getElementById("city-input").value.trim(); // Get user input for city
+    let city = document.getElementById("city-input").value.trim();
+    if (!city) return alert("Please enter a city name.");
 
-    if (!city) return alert("Please enter a city name."); // Ensure input is provided
-
-    // Weather API (Replace with your actual API key)
-    let apiKey = "7325WA9AQ6WJ64VG2EVPVKHDN"; 
+    let apiKey = "7325WA9AQ6WJ64VG2EVPVKHDN"; // Replace with your API key
     let url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=${apiKey}&contentType=json`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            let condition = data.currentConditions?.conditions || "Unknown"; // Weather condition
-            let temp = data.currentConditions?.temp || "N/A"; // Temperature
-            let genre = getGenreRecommendation(condition); // Get genre based on weather
+            let condition = data.currentConditions?.conditions || "Unknown";
+            let temp = data.currentConditions?.temp || "N/A";
+            let genre = getGenreRecommendation(condition);
 
-            // 🌍 Display Weather Condition and Genre Recommendation
             document.getElementById("weather-condition").innerText = `🌍 ${city}: ${condition} | ${temp}°C`;
             document.getElementById("weather-recommendation").innerText = `📖 Recommended Genre: ${genre}`;
 
-            // 🎯 Fetch books based on recommended genre
+            // 🎯 Fetch Books Based on Recommended Genre
             fetchBooksByGenre(genre);
         })
         .catch(error => console.error("Error fetching weather data:", error));
 }
 
-// 📚 Returns a book genre recommendation based on weather condition
+// 📚 Get Genre Recommendation Based on Weather
 function getGenreRecommendation(condition) {
-    condition = condition.toLowerCase(); // Convert to lowercase for easier comparison
-
+    condition = condition.toLowerCase();
     if (condition.includes("rain")) return "Mystery";
     if (condition.includes("clear")) return "Adventure";
     if (condition.includes("cloud")) return "Sci-Fi";
     if (condition.includes("snow")) return "Historical Fiction";
-    
-    return "General"; // Default genre if condition doesn't match
+    return "General"; // Default
 }
 
-// 📖 Fetch Books by Genre from Open Library API
+// 📖 Fetch Books by Genre from Open Library
 function fetchBooksByGenre(genre) {
     let url = `https://openlibrary.org/search.json?subject=${genre}&limit=5`;
 
@@ -56,14 +49,13 @@ function fetchBooksByGenre(genre) {
         .then(response => response.json())
         .then(data => {
             let bookCollection = document.getElementById("book-collection");
-            bookCollection.innerHTML = `<h2>📚 Books from "${genre}" Genre</h2>`; // Update heading
+            bookCollection.innerHTML = `<h2>📚 Books from "${genre}" Genre</h2>`;
 
             data.docs.forEach(book => {
                 let coverURL = book.cover_i
                     ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
-                    : "https://via.placeholder.com/128x190?text=No+Cover"; // Placeholder if no cover found
+                    : "https://via.placeholder.com/128x190?text=No+Cover";
 
-                // 📖 Create Book Card
                 let bookItem = document.createElement("div");
                 bookItem.classList.add("book-card");
                 bookItem.innerHTML = `
@@ -78,19 +70,19 @@ function fetchBooksByGenre(genre) {
         .catch(error => console.error("Error fetching books:", error));
 }
 
-// 📚 Add Book to Personal Library (LocalStorage)
+// 📚 Add Book to Personal Library
 function addToLibrary(title, author, genre) {
-    let books = JSON.parse(localStorage.getItem("books")) || []; // Retrieve books or initialize empty array
-    books.push({ title, author, genre, read: false }); // Add new book entry
-    localStorage.setItem("books", JSON.stringify(books)); // Save back to localStorage
-    loadBooks(); // Reload book list
+    let books = JSON.parse(localStorage.getItem("books")) || [];
+    books.push({ title, author, genre, read: false });
+    localStorage.setItem("books", JSON.stringify(books));
+    loadBooks();
 }
 
-// 📖 Load Books from Local Storage and Display
+// 📖 Load Books from Local Storage
 function loadBooks() {
-    let books = JSON.parse(localStorage.getItem("books")) || []; // Retrieve books
+    let books = JSON.parse(localStorage.getItem("books")) || [];
     let bookList = document.getElementById("book-list");
-    bookList.innerHTML = ""; // Clear existing list
+    bookList.innerHTML = "";
 
     books.forEach((book, index) => {
         let bookItem = document.createElement("div");
@@ -107,7 +99,7 @@ function loadBooks() {
     });
 }
 
-// 🔎 Search for Books from Open Library API
+// 🔎 Search for Books from Open Library
 function searchBooks() {
     let query = document.getElementById("search").value.trim();
     if (!query) return alert("Please enter a book name to search!");
@@ -147,10 +139,11 @@ function searchBooks() {
 // 🎯 Event Listener for Search Button
 document.getElementById("search-btn").addEventListener("click", searchBooks);
 
+
 // ✅ Toggle Read/Unread Status
 function toggleReadStatus(index) {
     let books = JSON.parse(localStorage.getItem("books")) || [];
-    books[index].read = !books[index].read; // Toggle status
+    books[index].read = !books[index].read;
     localStorage.setItem("books", JSON.stringify(books));
     loadBooks();
 }
@@ -158,12 +151,10 @@ function toggleReadStatus(index) {
 // ❌ Delete Book
 function deleteBook(index) {
     let books = JSON.parse(localStorage.getItem("books")) || [];
-    books.splice(index, 1); // Remove book from array
+    books.splice(index, 1);
     localStorage.setItem("books", JSON.stringify(books));
     loadBooks();
 }
-
-// ✨ Wand Glow Effect (Magic Cursor Trail)
 document.addEventListener("mousemove", function (e) {
     let glow = document.createElement("div");
     glow.classList.add("magic-glow");
@@ -171,8 +162,8 @@ document.addEventListener("mousemove", function (e) {
     glow.style.top = `${e.pageY}px`;
     document.body.appendChild(glow);
 
-    // Remove glow effect after animation
     setTimeout(() => {
         glow.remove();
     }, 500);
 });
+
