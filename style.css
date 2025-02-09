@@ -101,23 +101,7 @@ button:hover::after {
     padding: 20px;
 }
 
-/* 📜 Spellbook Styling */
-.book-card {
-    background: rgba(15, 15, 15, 0.9);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #f1c40f;
-    text-align: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border: 2px solid #f1c40f;
-    animation: floatBook 3s infinite ease-in-out;
-}
 
-/* 📚 Hover Effect: Floating Spellbook */
-.book-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 0 30px #f1c40f;
-}
 
 /* 📖 Book Covers */
 .book-cover {
@@ -170,18 +154,6 @@ body {
     }
 }
 
-/* 📖 Floating Spellbook Animation */
-@keyframes floatBook {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
 
 /* 🎩 Smooth Fade-in for Elements */
 @keyframes fadeIn {
