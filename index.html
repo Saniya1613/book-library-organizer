@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library Organizer</title>
+    <link rel="stylesheet" href="style.css"> <!-- Linking external CSS for styling -->
+</head>
+<body>
+    <!-- 📖 Main Heading with Hogwarts Theme -->
+    <h1>📚 Hogwarts Book Track-Map</h1>
+
+    <!-- 📌 Add Book Form: Allows users to manually add books -->
+    <div id="book-form">
+        <input type="text" id="title" placeholder="Book Title"> <!-- Input for book title -->
+        <input type="text" id="author" placeholder="Author"> <!-- Input for book author -->
+        <input type="text" id="genre" placeholder="Genre"> <!-- Input for book genre -->
+        <button id="addBookBtn">Add Book</button> <!-- Button to add the book -->
+    </div>
+
+    <!-- 🌦️ Weather-Based Book Recommendation -->
+    <div id="weather-search">
+        <input type="text" id="city-input" placeholder="Enter city name..." /> <!-- Input for city -->
+        <button id="get-weather-btn">Get Weather</button> <!-- Button to fetch weather info -->
+    </div>
+    
+    <div id="weather-info">
+        <h2 id="weather-condition">🌤️ Enter a city to see the weather</h2> <!-- Displays current weather -->
+        <p id="weather-recommendation">📖 Genre recommendation will appear here...</p> <!-- Suggests a book genre -->
+    </div>
+
+    <!-- 📚 Section for Books Recommended Based on Weather -->
+    <div id="recommended-books">
+        <h2>📖 Recommended Books</h2>
+        <div id="book-collection"></div> <!-- Books will be dynamically displayed here -->
+    </div>
+
+    <!-- 🔎 Library Search Section -->
+    <div id="library-search">
+        <input type="text" id="search" placeholder="Search books..."> <!-- Search bar for books -->
+        <button id="search-btn">Search Books</button> <!-- Search button -->
+    </div>
+
+    <!-- 📘 My Personal Library Section -->
+    <h2>📘 My Library</h2>
+    <div id="book-list"></div> <!-- Displays user's added books -->
+
+    <script src="script.js"></script> <!-- Linking external JavaScript file for functionality -->
+
+    <!-- 🕯️ Floating Magical Candles for Aesthetic Effect -->
+    <div class="candle"></div>
+    <div class="candle"></div>
+    <div class="candle"></div>
+    <div class="candle"></div>
+    <div class="candle"></div>
+
+</body>
+</html>
