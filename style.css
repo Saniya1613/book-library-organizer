@@ -130,16 +130,7 @@ button:hover::after {
     animation: fadeIn 2s ease-in-out;
 }
 
-/* 🕯️ Floating Magical Candles */
-.candle {
-    position: absolute;
-    width: 10px;
-    height: 30px;
-    background: #ffcc00;
-    border-radius: 5px;
-    box-shadow: 0 0 20px #ffcc00;
-    animation: floatCandle 4s infinite alternate ease-in-out;
-}
+
 
 /* ✨ Glowing Wand Effect */
 body {
@@ -204,15 +195,7 @@ body {
     }
 }
 
-/* 🕯️ Floating Candle Animation */
-@keyframes floatCandle {
-    0% {
-        transform: translateY(0px);
-    }
-    100% {
-        transform: translateY(-15px);
-    }
-}
+
 
 /* 🔄 Responsive Design for Small Screens */
 @media (max-width: 600px) {
